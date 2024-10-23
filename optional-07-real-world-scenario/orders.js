@@ -4,19 +4,34 @@ function generateUniqueId() {
 }
 
 // TODO: buatlah variabel yang menampung data orders
-let orders;
+let orders = [];
 
 // TODO: selesaikan fungsi addOrder
-function addOrder(customerName, items) {}
+function addOrder(customerName, items) {
+  orders.push({
+    id: generateUniqueId(),
+    customerName,
+    items,
+    totalPrice: items.reduce((acc, item) => acc + item.price, 0),
+    status: 'Menunggu',
+  })
+}
 
 // TODO: selesaikan fungsi updateOrderStatus
-function updateOrderStatus(orderId, status) {}
+function updateOrderStatus(orderId, status) {
+  const update = orders.find((order) => order.id === orderId);
+  update.status = status;
+}
 
 // TODO: selesaikan fungsi calculateTotalRevenue dari order yang berstatus Selesai
-function calculateTotalRevenue() {}
+function calculateTotalRevenue() {
+  return orders.filter((order) => order.status === 'Selesai').reduce((acc, order) => acc + order.totalPrice, 0);
+}
 
 // TODO: selesaikan fungsi deleteOrder
-function deleteOrder(id) {}
+function deleteOrder(id) {
+  orders = orders.filter((order) => order.id !== id);
+}
 
 export {
   orders,
